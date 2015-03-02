@@ -1,10 +1,8 @@
 package bat_nav;
 
 public class Plateau {
+	//Contient le placement des bateaux
+	//Contient les coups joués précédemment
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
 
 }
