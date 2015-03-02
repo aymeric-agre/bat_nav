@@ -1,6 +1,9 @@
 package bat_nav;
 
-public class Plateau {
+import java.awt.Graphics;
+import javax.swing.JPanel;
+
+public class Plateau extends JPanel{
 	//Contient le placement des bateaux
 	//Contient les coups joués précédemment
 
@@ -39,5 +42,17 @@ public class Plateau {
 		absShot = a;
 		ordShot = b;
 	}
-
+	public void paintComponent(Graphics g){
+		g.drawRect(50, 50, 200, 200);
+		g.drawLine(150, 50, 150, 250);
+		g.drawLine(50, 150, 250, 150);
+		g.drawLine(50, 50, 250, 250);
+		g.drawLine(50, 250, 250, 50);
+		
+		g.drawRect(50, 350, 200, 200);
+		g.drawLine(150, 350, 150, 550);
+		g.drawLine(50, 450, 250, 450);
+		g.drawLine(50, 350, 250, 550);
+		g.drawLine(50, 550, 250, 350);
+	}
 }
