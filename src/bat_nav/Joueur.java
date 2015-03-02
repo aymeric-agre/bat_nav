@@ -14,7 +14,7 @@ public class Joueur extends JFrame{
 	private JLabel label;
 	private JTextField t;
 	
-	private JPanel buildContentPane(){
+	private JPanel buildContentPane(){		// Creation TextBox
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout());
  
@@ -44,7 +44,7 @@ public class Joueur extends JFrame{
 }
 
 
-public class GetAction extends AbstractAction {
+public class GetAction extends AbstractAction {		//Recuperation name
 	private Joueur fenetre;
 	private String name;
  
