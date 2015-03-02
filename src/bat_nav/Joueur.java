@@ -1,26 +1,36 @@
 package bat_nav;
 
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JButton;
 
 public class Joueur extends JFrame{
 	//Contient le score, historique, les bateaux qu'il reste
-	private String name;
 	private JLabel label;
 	private JTextField t;
 	
 	private JPanel buildContentPane(){
-		JPanel IN = new JPanel();
-		IN.setLayout(new FlowLayout());
-		
+		JPanel panel = new JPanel();
+		panel.setLayout(new FlowLayout());
+ 
 		t = new JTextField();
-		
+ 
+		panel.add(t);
+ 
 		label = new JLabel("Rien pour le moment");
-		
-		return IN;
+ 
+		panel.add(label);
+ 
+		JButton bouton = new JButton(new GetAction(this, "Ok"));
+ 
+		panel.add(bouton);
+ 
+		return panel;
 	}
 	
 	public JTextField getTextField(){
@@ -35,9 +45,10 @@ public class Joueur extends JFrame{
 
 
 public class GetAction extends AbstractAction {
-	private FenetreSaisie fenetre;
+	private Joueur fenetre;
+	private String name;
  
-	public GetAction(FenetreSaisie fenetre, String texte){
+	public GetAction(Joueur fenetre, String texte){
 		super(texte);
  
 		this.fenetre = fenetre;
@@ -45,6 +56,8 @@ public class GetAction extends AbstractAction {
  
 	public void actionPerformed(ActionEvent e) { 
 		String texteUtilisateur = fenetre.getTextField().getText();
-		fenetre.getLabel().setText(texteUtilisateur);
+		fenetre.getLabel().setText(name);
 	} 
 }
+
+
