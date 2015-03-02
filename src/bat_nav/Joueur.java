@@ -55,7 +55,7 @@ public class GetAction extends AbstractAction {		//Recuperation name
 	}
  
 	public void actionPerformed(ActionEvent e) { 
-		String texteUtilisateur = fenetre.getTextField().getText();
+		name = fenetre.getTextField().getText();
 		fenetre.getLabel().setText(name);
 	} 
 }
