@@ -1,11 +1,8 @@
 package bat_nav;
 
 import java.awt.FlowLayout;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -28,7 +25,7 @@ class Fenetre extends JFrame implements ActionListener{
 	private JFrame f;
 	private JPanel p;
 	private JPanel infoJoueur;
-	private JPanel bouttons;
+	private JPanel boutons;
 	private JButton newGame;
 	private JButton exit;
 	
@@ -41,17 +38,17 @@ class Fenetre extends JFrame implements ActionListener{
 		p = (JPanel) getContentPane();
 		
 		infoJoueur = new JPanel();
-		bouttons = new JPanel();
+		boutons = new JPanel();
 		newGame = new JButton("Nouvelle partie");
 		exit = new JButton("Quitter");
 		
-		exit.addActionListener(this);
+		exit.addActionListener(fermerFenetre());
 		
-		bouttons.add("West", newGame);
-		bouttons.add("East", exit);
+		boutons.add("West", newGame);
+		boutons.add("East", exit);
 		
 		p.add("East", infoJoueur);
-		p.add("South", bouttons);
+		p.add("South", boutons);
 	}
 
 	@Override
