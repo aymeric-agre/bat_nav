@@ -1,11 +1,8 @@
 package bat_nav;
 
 import java.awt.FlowLayout;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -28,9 +25,10 @@ class Fenetre extends JFrame implements ActionListener{
 	private JFrame f;
 	private JPanel p;
 	private JPanel infoJoueur;
-	private JPanel bouttons;
+	private JPanel boutons;
 	private JButton newGame;
 	private JButton exit;
+	private Plateau plateau;
 	
 	
 	public Fenetre(){
@@ -39,27 +37,30 @@ class Fenetre extends JFrame implements ActionListener{
 		getContentPane().setLayout(new FlowLayout());
 		
 		p = (JPanel) getContentPane();
-		
+		plateau = new Plateau(25);
 		infoJoueur = new JPanel();
-		bouttons = new JPanel();
+		boutons = new JPanel();
 		newGame = new JButton("Nouvelle partie");
 		exit = new JButton("Quitter");
 		
 		exit.addActionListener(this);
 		
-		bouttons.add("West", newGame);
-		bouttons.add("East", exit);
+		boutons.add("West", newGame);
+		boutons.add("East", exit);
 		
+		p.add("West", plateau);
 		p.add("East", infoJoueur);
-		p.add("South", bouttons);
+		p.add("South", boutons);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object ae = e.getSource();
 		if(ae == exit){
-			System.out.println("Traitement de FIN");
+			System.out.println("Arrêt du jeu.");
 			System.exit(0);
+		}else if(ae == newGame){
+			System.out.println("Nouvelle partie.");
 		}
 	}
 }

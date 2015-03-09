@@ -17,6 +17,7 @@ public class Plateau extends JPanel{
 	{
 		taille=t;
 		plateau = new int[taille][taille];
+		viseur = new int[taille][taille];
 		for(int i=0; i<taille; i++)
 		{
 			for(int j=0; j<taille; j++)
