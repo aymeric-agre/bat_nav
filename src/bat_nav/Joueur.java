@@ -56,6 +56,7 @@ class CreationJoueur extends JFrame{ // A voir ou mettre
 
 
 class GetAction extends AbstractAction {		//Recuperation name
+
 	private CreationJoueur fenetre;
 	private String name;
  

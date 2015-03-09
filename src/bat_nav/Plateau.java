@@ -30,7 +30,12 @@ public class Plateau extends JPanel{
 	
 	public int coupJoue(int a, int b)
 	{
-		return plateau[a][b];
+		if(plateau[a][b]==1)
+		{
+			plateau[a][b] = -1;
+		}
+		return -plateau[a][b];
+		
 	}
 	
 	public void resultatTir(int a)
