@@ -42,7 +42,7 @@ class Fenetre extends JFrame implements ActionListener{
 		newGame = new JButton("Nouvelle partie");
 		exit = new JButton("Quitter");
 		
-		exit.addActionListener(fermerFenetre());
+		exit.addActionListener(this);
 		
 		boutons.add("West", newGame);
 		boutons.add("East", exit);
