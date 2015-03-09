@@ -12,6 +12,8 @@ public class Interface {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		CreationJoueur preFenetre = new CreationJoueur(); 
+		
 		Fenetre fenetre = new Fenetre();
 		
 		
@@ -40,9 +42,12 @@ class Fenetre extends JFrame implements ActionListener{
 		plateau = new Plateau(25);
 		infoJoueur = new JPanel();
 		boutons = new JPanel();
-		newGame = new JButton("Nouvelle partie");
-		exit = new JButton("Quitter");
+		plateau.setSize(400,400);
 		
+		newGame = new JButton("Nouvelle partie");
+		newGame.addActionListener(this);
+		
+		exit = new JButton("Quitter");
 		exit.addActionListener(this);
 		
 		boutons.add("West", newGame);
@@ -51,6 +56,8 @@ class Fenetre extends JFrame implements ActionListener{
 		p.add("West", plateau);
 		p.add("East", infoJoueur);
 		p.add("South", boutons);
+		
+		p.repaint();
 	}
 
 	@Override
@@ -61,6 +68,7 @@ class Fenetre extends JFrame implements ActionListener{
 			System.exit(0);
 		}else if(ae == newGame){
 			System.out.println("Nouvelle partie.");
+			//this.plateau = new Plateau();
 		}
 	}
 }
