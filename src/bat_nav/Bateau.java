@@ -33,4 +33,5 @@ public class Bateau {
 			ordEnd = b-t+1;
 		}
 	}
+
 }

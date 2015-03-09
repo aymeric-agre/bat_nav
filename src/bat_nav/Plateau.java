@@ -16,10 +16,12 @@ public class Plateau extends JPanel{
 	
 	Plateau(int t, String joueur)
 	{
+		super();
 		taille=t;
 		this.joueur=joueur;
 		plateau = new int[taille][taille];
 		viseur = new int[taille][taille];
+		this.repaint();
 	}
 	
 	public int coupJoue(int a, int b)
@@ -44,6 +46,8 @@ public class Plateau extends JPanel{
 	}
 	
 	public void paintComponent(Graphics g){
+		
+		super.paintComponent(g);
 		g.drawRect(50, 50, 200, 200);
 		g.drawLine(150, 50, 150, 250);
 		g.drawLine(50, 150, 250, 150);
