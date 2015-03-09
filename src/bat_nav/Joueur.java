@@ -9,8 +9,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class Joueur extends JFrame{
+public class Joueur {
 	//Contient le score, historique, les bateaux qu'il reste
+	
+	Joueur(int score)
+	{
+		
+	}
+		
+}
+
+
+
+class CreationJoueur extends JFrame{ // A voir ou mettre
 	private JLabel label;
 	private JTextField t;
 	
@@ -45,10 +56,11 @@ public class Joueur extends JFrame{
 
 
 class GetAction extends AbstractAction {		//Recuperation name
-	private Joueur fenetre;
+
+	private CreationJoueur fenetre;
 	private String name;
  
-	public GetAction(Joueur fenetre, String texte){
+	public GetAction(CreationJoueur fenetre, String texte){
 		super(texte);
  
 		this.fenetre = fenetre;
