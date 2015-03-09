@@ -44,7 +44,7 @@ public class Joueur extends JFrame{
 }
 
 
-public class GetAction extends AbstractAction {		//Recuperation name
+class GetAction extends AbstractAction {		//Recuperation name
 	private Joueur fenetre;
 	private String name;
  

@@ -17,6 +17,7 @@ public class Plateau extends JPanel{
 	{
 		taille=t;
 		plateau = new int[taille][taille];
+		viseur = new int[taille][taille];
 		for(int i=0; i<taille; i++)
 		{
 			for(int j=0; j<taille; j++)
@@ -29,7 +30,12 @@ public class Plateau extends JPanel{
 	
 	public int coupJoue(int a, int b)
 	{
-		return plateau[a][b];
+		if(plateau[a][b]==1)
+		{
+			plateau[a][b] = -1;
+		}
+		return -plateau[a][b];
+		
 	}
 	
 	public void resultatTir(int a)
