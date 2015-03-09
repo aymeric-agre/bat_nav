@@ -11,10 +11,10 @@ import javax.swing.JButton;
 
 public class Joueur {
 	//Contient le score, historique, les bateaux qu'il reste
-	
+	private String name;
 	Joueur(int score)
 	{
-		
+		this.name = GetAction.name;
 	}
 		
 }
@@ -59,7 +59,7 @@ class CreationJoueur extends JFrame{ // A voir ou mettre
 class GetAction extends AbstractAction {		//Recuperation name
 
 	private CreationJoueur fenetre;
-	private String name;
+	public static String name;
  
 	public GetAction(CreationJoueur fenetre, String texte){
 		super(texte);
