@@ -26,6 +26,9 @@ class CreationJoueur extends JFrame{ // A voir ou mettre
 	private JTextField t;
 	
 	private JPanel buildContentPane(){		// Creation TextBox
+		CreationJoueur fenetre = new CreationJoueur();
+		fenetre.setVisible(true);
+
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout());
  
@@ -34,8 +37,6 @@ class CreationJoueur extends JFrame{ // A voir ou mettre
 		panel.add(t);
  
 		label = new JLabel("Rien pour le moment");
- 
-		panel.add(label);
  
 		JButton bouton = new JButton(new GetAction(this, "Ok"));
  
