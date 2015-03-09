@@ -11,10 +11,10 @@ import javax.swing.JButton;
 
 public class Joueur {
 	//Contient le score, historique, les bateaux qu'il reste
-	
+	private String name;
 	Joueur(int score)
 	{
-		
+		this.name = GetAction.name;
 	}
 		
 }
@@ -26,6 +26,9 @@ class CreationJoueur extends JFrame{ // A voir ou mettre
 	private JTextField t;
 	
 	private JPanel buildContentPane(){		// Creation TextBox
+		CreationJoueur fenetre = new CreationJoueur();
+		fenetre.setVisible(true);
+
 		JPanel panel = new JPanel();
 		panel.setLayout(new FlowLayout());
  
@@ -34,8 +37,6 @@ class CreationJoueur extends JFrame{ // A voir ou mettre
 		panel.add(t);
  
 		label = new JLabel("Rien pour le moment");
- 
-		panel.add(label);
  
 		JButton bouton = new JButton(new GetAction(this, "Ok"));
  
@@ -56,8 +57,9 @@ class CreationJoueur extends JFrame{ // A voir ou mettre
 
 
 class GetAction extends AbstractAction {		//Recuperation name
+
 	private CreationJoueur fenetre;
-	private String name;
+	public static String name;
  
 	public GetAction(CreationJoueur fenetre, String texte){
 		super(texte);

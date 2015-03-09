@@ -9,14 +9,16 @@ public class Plateau extends JPanel{
 
 	int[][] plateau;
 	int[][] viseur;
+	String joueur;
 	int taille;
 	int absShot;
 	int ordShot;
 	
-	Plateau(int t)
+	Plateau(int t, String joueur)
 	{
 		super();
 		taille=t;
+		this.joueur=joueur;
 		plateau = new int[taille][taille];
 		viseur = new int[taille][taille];
 		this.setSize(400,400);
@@ -25,7 +27,12 @@ public class Plateau extends JPanel{
 	
 	public int coupJoue(int a, int b)
 	{
-		return plateau[a][b];
+		if(plateau[a][b]==1)
+		{
+			plateau[a][b] = -1;
+		}
+		return -plateau[a][b];
+		
 	}
 	
 	public void resultatTir(int a)
@@ -54,4 +61,6 @@ public class Plateau extends JPanel{
 		g.drawLine(50, 350, 250, 550);
 		g.drawLine(50, 550, 250, 350);
 	}
+
+
 }
