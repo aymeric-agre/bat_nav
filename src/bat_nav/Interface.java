@@ -1,5 +1,12 @@
 package bat_nav;
 
+import java.awt.FlowLayout;
+import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -8,23 +15,51 @@ public class Interface {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		JFrame f = new JFrame("Bataille Navale");
-		JPanel p = (JPanel)f.getContentPane();
-		Plateau damier = new Plateau();
+		Fenetre fenetre = new Fenetre();
 		
-		JPanel infoJoueur = new JPanel();
-				
-		JPanel bouttons = new JPanel();
-		JButton newGame = new JButton("Nouvelle partie");
-		JButton exit = new JButton("Quitter");
+		
+		fenetre.setVisible(true);
+		
+		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	//Ferme le programme à la fermeture de la fenêtre
+	}
+}
+
+class Fenetre extends JFrame implements ActionListener{
+	private JFrame f;
+	private JPanel p;
+	private JPanel infoJoueur;
+	private JPanel bouttons;
+	private JButton newGame;
+	private JButton exit;
+	
+	
+	public Fenetre(){
+		setTitle("Bataille Navale");
+		setSize(1000,600);		
+		getContentPane().setLayout(new FlowLayout());
+		
+		p = (JPanel) getContentPane();
+		
+		infoJoueur = new JPanel();
+		bouttons = new JPanel();
+		newGame = new JButton("Nouvelle partie");
+		exit = new JButton("Quitter");
+		
+		exit.addActionListener(this);
+		
 		bouttons.add("West", newGame);
 		bouttons.add("East", exit);
 		
-		p.add("West", damier);
 		p.add("East", infoJoueur);
 		p.add("South", bouttons);
-		f.pack();
-		f.setSize(1000, 600);
-		f.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object ae = e.getSource();
+		if(ae == exit){
+			System.out.println("Traitement de FIN");
+			System.exit(0);
+		}
 	}
 }
