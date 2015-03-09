@@ -37,7 +37,6 @@ class Fenetre extends JFrame implements ActionListener{
 		getContentPane().setLayout(new FlowLayout());
 		
 		p = (JPanel) getContentPane();
-		plateau = new Plateau(25);
 		infoJoueur = new JPanel();
 		boutons = new JPanel();
 		newGame = new JButton("Nouvelle partie");
@@ -48,7 +47,7 @@ class Fenetre extends JFrame implements ActionListener{
 		boutons.add("West", newGame);
 		boutons.add("East", exit);
 		
-		p.add("West", plateau);
+		//p.add("West", plateau);
 		p.add("East", infoJoueur);
 		p.add("South", boutons);
 	}

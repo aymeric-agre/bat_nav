@@ -9,23 +9,17 @@ public class Plateau extends JPanel{
 
 	int[][] plateau;
 	int[][] viseur;
+	String joueur;
 	int taille;
 	int absShot;
 	int ordShot;
 	
-	Plateau(int t)
+	Plateau(int t, String joueur)
 	{
 		taille=t;
+		this.joueur=joueur;
 		plateau = new int[taille][taille];
 		viseur = new int[taille][taille];
-		for(int i=0; i<taille; i++)
-		{
-			for(int j=0; j<taille; j++)
-			{
-				plateau[i][j] = 0;
-				viseur[i][j] = 0;
-			}
-		}
 	}
 	
 	public int coupJoue(int a, int b)
@@ -48,6 +42,7 @@ public class Plateau extends JPanel{
 		absShot = a;
 		ordShot = b;
 	}
+	
 	public void paintComponent(Graphics g){
 		g.drawRect(50, 50, 200, 200);
 		g.drawLine(150, 50, 150, 250);
@@ -61,4 +56,6 @@ public class Plateau extends JPanel{
 		g.drawLine(50, 350, 250, 550);
 		g.drawLine(50, 550, 250, 350);
 	}
+
+
 }
