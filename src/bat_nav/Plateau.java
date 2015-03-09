@@ -1,7 +1,8 @@
 package bat_nav;
 
-import java.awt.Graphics;
-import javax.swing.JPanel;
+import java.awt.*;
+
+import javax.swing.*;
 
 public class Plateau extends JPanel{
 	//Contient le placement des bateaux
@@ -9,16 +10,14 @@ public class Plateau extends JPanel{
 
 	int[][] plateau;
 	int[][] viseur;
-	String joueur;
 	int taille;
 	int absShot;
 	int ordShot;
 	
-	Plateau(int t, String joueur)
+	Plateau(int t)
 	{
 		super();
 		taille=t;
-		this.joueur=joueur;
 		plateau = new int[taille][taille];
 		viseur = new int[taille][taille];
 		this.setSize(400,400);
@@ -48,18 +47,24 @@ public class Plateau extends JPanel{
 	
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		int base=this.getHeight()/taille;
 		
-		g.drawRect(50, 50, 200, 200);
-		g.drawLine(150, 50, 150, 250);
+		for(int i = 1; i<taille; i++)
+		{
+			g.drawLine(base*i, base, base*i, base*taille/2-20);
+		}
+		
+		/*g.drawRect(50, 50, 200, 200);
+		
 		g.drawLine(50, 150, 250, 150);
-		g.drawLine(50, 50, 250, 250);
-		g.drawLine(50, 250, 250, 50);
+		
 		
 		g.drawRect(50, 350, 200, 200);
 		g.drawLine(150, 350, 150, 550);
-		g.drawLine(50, 450, 250, 450);
-		g.drawLine(50, 350, 250, 550);
-		g.drawLine(50, 550, 250, 350);
+		g.drawLine(50, 450, 250, 450);*/
+		
+		//this.updateUI();
+		System.out.println("Dessin.");
 	}
 
 

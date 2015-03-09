@@ -1,12 +1,11 @@
 package bat_nav;
 
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class Interface {
 	
@@ -34,14 +33,18 @@ class Fenetre extends JFrame implements ActionListener{
 	
 	
 	public Fenetre(){
-		setTitle("Bataille Navale");
-		setSize(1000,600);		
-		getContentPane().setLayout(new FlowLayout());
+		f = this;
+		f.setTitle("Bataille Navale");
+		f.setSize(1000,600);		
+		//getContentPane().setLayout(new FlowLayout());
+		p = new JPanel();
+		p.setLayout(new BorderLayout());
+		f.setContentPane(p);
 		
-		p = (JPanel) getContentPane();
 		infoJoueur = new JPanel();
 		boutons = new JPanel();
-		plateau.setSize(400,400);
+		plateau = new Plateau(7);
+		
 		
 		newGame = new JButton("Nouvelle partie");
 		newGame.addActionListener(this);
@@ -52,11 +55,17 @@ class Fenetre extends JFrame implements ActionListener{
 		boutons.add("West", newGame);
 		boutons.add("East", exit);
 		
-		//p.add("West", plateau);
+		p.add("Center",plateau);
 		p.add("East", infoJoueur);
 		p.add("South", boutons);
 		
-		p.repaint();
+		//p.repaint();
+		plateau.setSize(500, 500);
+		//plateau.updateUI();
+		f.setVisible(true);
+		
+		System.out.println(plateau.getX()+"  "+plateau.getY());
+		System.out.println(plateau.getHeight()+"  "+plateau.getWidth());
 	}
 
 	@Override
