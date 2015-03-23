@@ -35,7 +35,7 @@ class Fenetre extends JFrame implements ActionListener{
 	public Fenetre(){
 		f = this;
 		f.setTitle("Bataille Navale");
-		f.setSize(1000,600);		
+		f.setSize(1400,800);		
 		//getContentPane().setLayout(new FlowLayout());
 		p = new JPanel();
 		p.setLayout(new BorderLayout());
