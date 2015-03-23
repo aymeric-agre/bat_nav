@@ -46,12 +46,14 @@ public class Plateau extends JPanel{
 	}
 	
 	public void paintComponent(Graphics g){
+		int marge = 20;
 		super.paintComponent(g);
 		int base=this.getHeight()/taille;
 		
 		for(int i = 1; i<taille; i++)
 		{
-			g.drawLine(base*i, base, base*i, base*taille/2-20);
+			g.drawLine(base*i+marge, marge, base*i+marge, base*taille+marge);
+			g.drawLine(marge, base*i+marge, base*taille+marge, base*i+marge);
 		}
 		
 		/*g.drawRect(50, 50, 200, 200);

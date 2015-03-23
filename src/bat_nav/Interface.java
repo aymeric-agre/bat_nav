@@ -43,7 +43,7 @@ class Fenetre extends JFrame implements ActionListener{
 		
 		infoJoueur = new JPanel();
 		boutons = new JPanel();
-		plateau = new Plateau(7);
+		plateau = new Plateau(12);
 		
 		
 		newGame = new JButton("Nouvelle partie");
@@ -59,9 +59,6 @@ class Fenetre extends JFrame implements ActionListener{
 		p.add("East", infoJoueur);
 		p.add("South", boutons);
 		
-		//p.repaint();
-		plateau.setSize(500, 500);
-		//plateau.updateUI();
 		f.setVisible(true);
 		
 		System.out.println(plateau.getX()+"  "+plateau.getY());
@@ -76,7 +73,7 @@ class Fenetre extends JFrame implements ActionListener{
 			System.exit(0);
 		}else if(ae == newGame){
 			System.out.println("Nouvelle partie.");
-			//this.plateau = new Plateau();
+			this.plateau = new Plateau(25);
 		}
 	}
 }
