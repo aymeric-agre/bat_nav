@@ -12,9 +12,13 @@ import javax.swing.JButton;
 public class Joueur {
 	//Contient le score, historique, les bateaux qu'il reste
 	private String name;
-	Joueur(int score)
+	
+	public Joueur(int score)
 	{
 		this.name = GetAction.name;
+		score = 0;
+		
+		System.out.println("On crée les objets Navire pour "+this.name);
 	}
 		
 }
