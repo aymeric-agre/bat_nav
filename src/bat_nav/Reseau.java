@@ -42,4 +42,6 @@ public class Reseau {
 		int resultat = plateau.coupJoue(x, y);
 		return resultat;
 	}
+
+
 }
