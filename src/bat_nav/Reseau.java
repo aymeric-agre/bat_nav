@@ -10,6 +10,7 @@ import bat_nav_serveur.ServeurImpl;
 public class Reseau implements Client {
 	
 	Plateau plateau;
+	ServeurImpl serveur;
 	//Plateau/Socket joueur_distant;
 	int joueur;
 	int premier_joueur;
@@ -22,7 +23,7 @@ public class Reseau implements Client {
 	public Reseau(Plateau p) {
 		try {
 			UnicastRemoteObject.exportObject(this);
-			ServeurImpl serveur = (ServeurImpl) Naming.lookup("rmi:///bat_nav");
+			serveur = (ServeurImpl) Naming.lookup("rmi:///bat_nav");
 			joueur = serveur.register(this);
 		} catch (Exception e) {
 			System.out.println("Fail connection au serveur: " + e.getMessage());
@@ -31,24 +32,29 @@ public class Reseau implements Client {
 	}
 	
 	//appelé par nous quand on veut jouer un coup sur la grille du joueur distant
-	public int joueCoup(int x, int y) {
-		//le joueur joue un coup à telle coordonnée,
-		//on transmet sur le réseau
-		//on recoit
-		//0: plouf
-		//1: touché
-		//2: coulé
-		int resultat = 0;
-		
-		//ecrire sur le socket
-		//resultat = joueur_distant.recoitCoup(x, y);
-		return resultat;
+	public int joueCoup(int x, int y) throws RemoteException {
+		return serveur.joueCoup(joueur, x, y);
 	}
 	
 	//appelé par le joueur distant quand il veut jouer un coup sur notre grille
 	public int recoitCoup(int x, int y) {
 		int resultat = plateau.coupJoue(x, y);
 		return resultat;
+	}
+	
+	public void placeBateaux() {
+		//plateau.placeBateaux();
+	}
+	
+	public void jeSuisPret() {
+		//serveur.pret(joueur);
+	}
+	
+	public void commencePartie(int joueur) {
+		if (this.joueur == joueur) {
+			//c'est a nous de commencer
+		}
+		// la partie commence
 	}
 }
 

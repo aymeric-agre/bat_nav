@@ -5,18 +5,18 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Random;
 
 import bat_nav.Client;
-import bat_nav.Plateau;
 
 interface Serveur extends Remote {
 	public int register(Client client) throws RemoteException;
-	public int joueCoup(int x, int y) throws RemoteException;
-	public int recoitCoup(int x, int y) throws RemoteException;
+	public void pret(int joueur) throws RemoteException;
+	public int joueCoup(int joueur, int x, int y) throws RemoteException;
 }
 
 @SuppressWarnings("serial")
 public class ServeurImpl extends UnicastRemoteObject implements Serveur {
 	Client joueur1;
 	Client joueur2;
+	int[] pret = new int[2];
 	int premier_joueur;
 	
 	public ServeurImpl() throws RemoteException {
@@ -27,31 +27,8 @@ public class ServeurImpl extends UnicastRemoteObject implements Serveur {
 		} catch (Exception e) {
 			System.out.println("Fail serveur: " + e.getMessage());
 		}
-		//connecter au joueur distant ici
-		//determiner le numero des joueurs ici + leurs noms
 		Random rand = new Random();
 		premier_joueur = rand.nextInt(2)+1;
-	}
-	
-	//appelé par nous quand on veut jouer un coup sur la grille du joueur distant
-	public int joueCoup(int x, int y) {
-		//le joueur joue un coup à telle coordonnée,
-		//on transmet sur le réseau
-		//on recoit
-		//0: plouf
-		//1: touché
-		//2: coulé
-		int resultat = 0;
-		
-		//ecrire sur le socket
-		//resultat = joueur_distant.recoitCoup(x, y);
-		return resultat;
-	}
-	
-	//appelé par le joueur distant quand il veut jouer un coup sur notre grille
-	public int recoitCoup(int x, int y) {
-		int resultat = plateau.coupJoue(x, y);
-		return resultat;
 	}
 
 	@Override
@@ -61,6 +38,11 @@ public class ServeurImpl extends UnicastRemoteObject implements Serveur {
 			return 1;
 		} else if (joueur2 == null) {
 			joueur2 = client;
+			
+			// on a deux joueurs: on place les bateaux
+			joueur1.placeBateaux();
+			joueur2.placeBateaux();
+			
 			return 2;
 		} else {
 			System.out.println("Un troisieme joueur essaye de se connecter");
@@ -73,6 +55,24 @@ public class ServeurImpl extends UnicastRemoteObject implements Serveur {
 			new ServeurImpl();
 		} catch (RemoteException e) {
 			System.out.println("Fail serveur: " + e.getMessage());
+		}
+	}
+
+	@Override
+	public int joueCoup(int joueur, int x, int y) throws RemoteException {
+		if (joueur==1) {
+			return joueur2.recoitCoup(x, y);
+		} else {
+			return joueur1.recoitCoup(x, y);
+		}
+	}
+
+	@Override
+	public void pret(int joueur) throws RemoteException {
+		this.pret[joueur-1] = 1;
+		if (this.pret[0]==1 && this.pret[1]==1) {
+			joueur1.commencePartie(premier_joueur);
+			joueur2.commencePartie(premier_joueur);
 		}
 	}
 }
