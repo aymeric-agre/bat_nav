@@ -4,13 +4,10 @@ import java.rmi.*;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Random;
 
-interface Serveur extends Remote {
-	public int joueCoup(int x, int y) throws RemoteException;
-	public int recoitCoup(int x, int y) throws RemoteException;
-}
+import bat_nav_serveur.ServeurImpl;
 
 @SuppressWarnings("serial")
-public class Reseau extends UnicastRemoteObject implements Serveur {
+public class Reseau implements Client {
 	
 	Plateau plateau;
 	//Plateau/Socket joueur_distant;
@@ -22,12 +19,15 @@ public class Reseau extends UnicastRemoteObject implements Serveur {
 	//serveur = joueur 2
 	//il faut se mettre d'accord
 	
-	public Reseau(Plateau p) throws RemoteException {
+	public Reseau(Plateau p) {
+		try {
+			UnicastRemoteObject.exportObject(this);
+			ServeurImpl serveur = (ServeurImpl) Naming.lookup("rmi:///bat_nav");
+			joueur = serveur.register(this);
+		} catch (Exception e) {
+			System.out.println("Fail connection au serveur: " + e.getMessage());
+		}
 		plateau = p;
-		//connecter au joueur distant ici
-		//determiner le numero des joueurs ici + leurs noms
-		Random rand = new Random();
-		premier_joueur = rand.nextInt(2)+1;
 	}
 	
 	//appelé par nous quand on veut jouer un coup sur la grille du joueur distant
@@ -50,6 +50,12 @@ public class Reseau extends UnicastRemoteObject implements Serveur {
 		int resultat = plateau.coupJoue(x, y);
 		return resultat;
 	}
-
-
 }
+
+/* Dans main:
+ * try {
+ * 	new Reseau();
+ * } catch (RemoteException e) {
+ * 	System.out.println("Fail :" + e.getMessage());
+ * }
+ */
