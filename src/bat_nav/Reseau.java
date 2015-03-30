@@ -1,8 +1,16 @@
 package bat_nav;
 
+import java.rmi.*;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Random;
 
-public class Reseau {
+interface Serveur extends Remote {
+	public int joueCoup(int x, int y) throws RemoteException;
+	public int recoitCoup(int x, int y) throws RemoteException;
+}
+
+@SuppressWarnings("serial")
+public class Reseau extends UnicastRemoteObject implements Serveur {
 	
 	Plateau plateau;
 	//Plateau/Socket joueur_distant;
@@ -14,7 +22,7 @@ public class Reseau {
 	//serveur = joueur 2
 	//il faut se mettre d'accord
 	
-	public Reseau(Plateau p) {
+	public Reseau(Plateau p) throws RemoteException {
 		plateau = p;
 		//connecter au joueur distant ici
 		//determiner le numero des joueurs ici + leurs noms
