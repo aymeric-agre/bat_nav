@@ -10,9 +10,6 @@ public class Joueur {
 	public Joueur(String name, int score)
 	{
 		this.name = CreationJoueur.Joueur;
-		score = 0;
-		
-		System.out.println("On crée les objets Navire pour "+this.name);
 	}
 		
 }
