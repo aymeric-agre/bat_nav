@@ -106,13 +106,13 @@ class Traitement implements MouseListener
 		{
 			if(x>=0&&x<jeu.taille&&y>=0&&y<jeu.taille)
 			{
-				if(y-2>=0)
+				if(y-2>=0&&jeu.plateau[x][y-1]==0&&jeu.plateau[x][y]==0&&jeu.plateau[x][y-2]==0)
 					jeu.plateau[x][y-1]=-1;
-				if(y+2<jeu.taille)
+				if(y+2<jeu.taille&&jeu.plateau[x][y+1]==0&&jeu.plateau[x][y]==0&&jeu.plateau[x][y+2]==0)
 					jeu.plateau[x][y+1]=-1;
-				if(x-2>=0)
+				if(x-2>=0&&jeu.plateau[x][y]==0&&jeu.plateau[x-1][y]==0&&jeu.plateau[x-2][y]==0)
 					jeu.plateau[x-1][y]=-1;
-				if(x+2<jeu.taille)
+				if(x+2<jeu.taille&&jeu.plateau[x][y]==0&&jeu.plateau[x+1][y]==0&&jeu.plateau[x+2][y]==0)
 					jeu.plateau[x+1][y]=-1;
 				
 				jeu.absShot=x;
