@@ -6,24 +6,12 @@ import javax.swing.JOptionPane;
 public class Joueur {
 	//Contient le score, historique, les bateaux qu'il reste
 	private String name;
+	private Integer score;
 	
-	public Joueur(String name, int score)
-	{
-		this.name = CreationJoueur.Joueur;
+	public Joueur(String nom){
+		name = nom;
 		score = 0;
-		
-		System.out.println("On crée les objets Navire pour "+this.name);
-	}
-		
+		System.out.println("Création d\'un nouveau joueur: " + name);
+	}		
 }
-
-
-
-class CreationJoueur extends JFrame{  // A voir ou mettre
-	
-	static String Joueur = JOptionPane.showInputDialog(null, "Veuillez entrer un nom de joueur.", "Nom du joueur", JOptionPane.QUESTION_MESSAGE);
-	
-	}
-	
-	
 

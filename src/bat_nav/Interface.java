@@ -11,9 +11,6 @@ public class Interface {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		CreationJoueur Joueur1 = new CreationJoueur(); 
-		CreationJoueur Joueur2 = new CreationJoueur();
-
 		Fenetre fenetre = new Fenetre();
 
 		fenetre.setVisible(true);
@@ -30,7 +27,7 @@ class Fenetre extends JFrame implements ActionListener{
 	private JButton newGame;
 	private JButton exit;
 	private Plateau plateau;
-	
+	private Joueur joueur;	
 	
 	public Fenetre(){
 		f = this;
@@ -44,7 +41,7 @@ class Fenetre extends JFrame implements ActionListener{
 		infoJoueur = new JPanel();
 		boutons = new JPanel();
 		plateau = new Plateau(10);
-		joueur = new Joueur("joueur");
+	
 		newGame = new JButton("Nouvelle partie");
 		newGame.addActionListener(this);
 		
@@ -67,11 +64,17 @@ class Fenetre extends JFrame implements ActionListener{
 	public void newGame() {
 		// TODO Auto-generated method stub
 		
-		Integer taille = Integer.parseInt(JOptionPane.showInputDialog(null, "Veuillez rentrer une taille de plateau (entre 5 et 20).", "Taille du plateau", JOptionPane.QUESTION_MESSAGE));
+		Integer taille = Integer.parseInt(JOptionPane.showInputDialog(null, "Taille du plateau.", "Taille du plateau", JOptionPane.QUESTION_MESSAGE));
 		
 		plateau.changerTaille(taille);
 	}
 
+	public void newPlayer(){
+		String name = JOptionPane.showInputDialog(null, "Nom du joueur.", "Nom du joueur", JOptionPane.QUESTION_MESSAGE);
+		
+		joueur = new Joueur(name);
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object ae = e.getSource();
