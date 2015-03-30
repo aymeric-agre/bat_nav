@@ -11,11 +11,14 @@ public class Interface {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		CreationJoueur preFenetre = new CreationJoueur(); 
+		CreationJoueur Joueur1 = new CreationJoueur(); 
+		CreationJoueur Joueur2 = new CreationJoueur();
+
 		
 		Fenetre fenetre = new Fenetre();
-		fenetre.newGame();
 		
+		fenetre.newGame();
+				
 		fenetre.setVisible(true);
 		
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	//Ferme le programme à la fermeture de la fenêtre
