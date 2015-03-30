@@ -14,7 +14,6 @@ public class Interface {
 		CreationJoueur Joueur1 = new CreationJoueur(); 
 		CreationJoueur Joueur2 = new CreationJoueur();
 
-		
 		Fenetre fenetre = new Fenetre();
 
 		fenetre.setVisible(true);
