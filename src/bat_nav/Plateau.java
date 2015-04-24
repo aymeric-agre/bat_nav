@@ -12,7 +12,7 @@ public class Plateau extends JPanel{
 
 	int[][] plateau;
 	int[][] viseur;
-	int taille;
+	public int taille;
 	int phaseDeJeu;
 	int choix;
 	int base;
@@ -29,6 +29,14 @@ public class Plateau extends JPanel{
 		taille=ta;
 		phaseDeJeu = 0;
 		choix = 0;
+		plateau = new int[taille][taille];
+		viseur = new int[taille][taille];
+		this.repaint();
+	}
+	
+	public void changerTaille(int ta)
+	{
+		taille = ta;
 		plateau = new int[taille][taille];
 		viseur = new int[taille][taille];
 		this.repaint();
@@ -60,7 +68,7 @@ public class Plateau extends JPanel{
 		super.paintComponent(g);
 		base=(this.getHeight()-marge)/taille;
 		
-		for(int i = 1; i<taille; i++)
+		for(int i = 0; i<taille+1; i++)
 		{
 			g.drawLine(base*i+marge, marge, base*i+marge, base*taille+marge);
 			g.drawLine(marge, base*i+marge, base*taille+marge, base*i+marge);

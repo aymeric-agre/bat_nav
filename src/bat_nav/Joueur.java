@@ -1,80 +1,17 @@
 package bat_nav;
 
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import javax.swing.AbstractAction;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 public class Joueur {
 	//Contient le score, historique, les bateaux qu'il reste
 	private String name;
+	private Integer score;
 	
-	public Joueur(int score)
-	{
-		this.name = GetAction.name;
+	public Joueur(String nom){
+		name = nom;
 		score = 0;
-		
-		System.out.println("On crée les objets Navire pour "+this.name);
-	}
-		
+		System.out.println("Création d\'un nouveau joueur: " + name);
+	}		
 }
-
-
-
-class CreationJoueur extends JFrame{ // A voir ou mettre
-	private JLabel label;
-	private JTextField t;
-	
-	private JPanel buildContentPane(){		// Creation TextBox
-		CreationJoueur fenetre = new CreationJoueur();
-		fenetre.setVisible(true);
-
-		JPanel panel = new JPanel();
-		panel.setLayout(new FlowLayout());
- 
-		t = new JTextField();
- 
-		panel.add(t);
- 
-		label = new JLabel("Rien pour le moment");
- 
-		JButton bouton = new JButton(new GetAction(this, "Ok"));
- 
-		panel.add(bouton);
- 
-		return panel;
-	}
-	
-	public JTextField getTextField(){
-		return t;
-	}
- 
-	public JLabel getLabel(){
-		return label;
-	}
-
-}
-
-
-class GetAction extends AbstractAction {		//Recuperation name
-
-	private CreationJoueur fenetre;
-	public static String name;
- 
-	public GetAction(CreationJoueur fenetre, String texte){
-		super(texte);
- 
-		this.fenetre = fenetre;
-	}
- 
-	public void actionPerformed(ActionEvent e) { 
-		name = fenetre.getTextField().getText();
-		fenetre.getLabel().setText(name);
-	} 
-}
-
 

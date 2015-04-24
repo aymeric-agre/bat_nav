@@ -11,11 +11,8 @@ public class Interface {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		CreationJoueur preFenetre = new CreationJoueur(); 
-		
 		Fenetre fenetre = new Fenetre();
-		fenetre.newGame();
-		
+
 		fenetre.setVisible(true);
 		
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	//Ferme le programme à la fermeture de la fenêtre
@@ -30,7 +27,7 @@ class Fenetre extends JFrame implements ActionListener{
 	private JButton newGame;
 	private JButton exit;
 	private Plateau plateau;
-	
+	private Joueur joueur;	
 	
 	public Fenetre(){
 		f = this;
@@ -43,7 +40,8 @@ class Fenetre extends JFrame implements ActionListener{
 		
 		infoJoueur = new JPanel();
 		boutons = new JPanel();
-		plateau = new Plateau(5);
+		plateau = new Plateau(10);
+	
 		newGame = new JButton("Nouvelle partie");
 		newGame.addActionListener(this);
 		
@@ -65,12 +63,18 @@ class Fenetre extends JFrame implements ActionListener{
 
 	public void newGame() {
 		// TODO Auto-generated method stub
-		Integer taille = Integer.parseInt(JOptionPane.showInputDialog(null, "Veuillez rentrer une taille de plateau (entre 5 et 20).", "Taille du plateau", JOptionPane.QUESTION_MESSAGE));
-		remove(this.plateau);
-		this.add("Center",new Plateau(taille));
-		f.repaint();
+		
+		Integer taille = Integer.parseInt(JOptionPane.showInputDialog(null, "Taille du plateau.", "Taille du plateau", JOptionPane.QUESTION_MESSAGE));
+		
+		plateau.changerTaille(taille);
 	}
 
+	public void newPlayer(){
+		String name = JOptionPane.showInputDialog(null, "Nom du joueur.", "Nom du joueur", JOptionPane.QUESTION_MESSAGE);
+		
+		joueur = new Joueur(name);
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object ae = e.getSource();
