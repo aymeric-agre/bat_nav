@@ -23,8 +23,12 @@ public class ServeurImpl extends UnicastRemoteObject implements Serveur {
 	public ServeurImpl() throws RemoteException {
 		super();
 		try {
-			LocateRegistry.createRegistry(8888);
-			Naming.rebind("//:8888/", this);
+			try{
+				LocateRegistry.createRegistry(2004);
+			}catch (Exception e){
+				LocateRegistry.getRegistry(2004);
+			}
+			Naming.rebind("//:2004/", this);
 			System.out.println("Serveur installe");
 		} catch (Exception e) {
 			System.out.println("Fail serveur: " + e.getMessage());

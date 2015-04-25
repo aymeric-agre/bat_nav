@@ -1,9 +1,13 @@
 package bat_nav;
 
+import IOS;
+import OC;
+
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.Naming;
 
 import javax.swing.*;
 
@@ -11,6 +15,23 @@ public class Interface {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		IOS serveur;
+		String result;
+		OC client = new OC();
+		try {
+			String nomserveur = "//:2005/transformeur";
+			serveur = (IOS)Naming.lookup(nomserveur);
+		}
+		catch(Exception ex) {
+			System.out.println("Exception ; "+ ex.getMessage());
+			ex. printStackTrace();
+			return;
+		}
+		System.out.print("transformation de la chaine : bonjour --> ");
+		result = client.demande("bonjour",serveur);
+		System.out.println(result);
+		
+		
 		Fenetre fenetre = new Fenetre();
 
 		fenetre.setVisible(true);
