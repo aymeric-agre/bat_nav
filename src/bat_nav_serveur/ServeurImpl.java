@@ -1,6 +1,7 @@
 package bat_nav_serveur;
 
 import java.rmi.*;
+import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Random;
 
@@ -22,7 +23,8 @@ public class ServeurImpl extends UnicastRemoteObject implements Serveur {
 	public ServeurImpl() throws RemoteException {
 		super();
 		try {
-			Naming.bind("rmi://localhost/bat_nav", this);
+			LocateRegistry.createRegistry(8888);
+			Naming.rebind("//:8888/", this);
 			System.out.println("Serveur installe");
 		} catch (Exception e) {
 			System.out.println("Fail serveur: " + e.getMessage());
