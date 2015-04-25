@@ -1,36 +1,24 @@
 package bat_nav_serveur;
 
 import java.rmi.*;
-import java.rmi.registry.LocateRegistry;
 import java.rmi.server.*;
 import java.util.Random;
 
 import bat_nav.Client;
 
 @SuppressWarnings("serial")
-public class OS extends UnicastRemoteObject implements IOS {
+class OS extends UnicastRemoteObject implements IOS {
 	Client joueur1;
 	Client joueur2;
 	int[] pret = new int[2];
 	int premier_joueur;
 	
-	public OS() throws RemoteException {
+	OS() throws RemoteException {
 		super();
-		try {
-			try{
-				LocateRegistry.createRegistry(2004);
-			}catch (Exception e){
-				LocateRegistry.getRegistry(2004);
-			}
-			Naming.rebind("//:2004/", this);
-			System.out.println("Serveur installe");
-		} catch (Exception e) {
-			System.out.println("Fail serveur: " + e.getMessage());
-		}
 		Random rand = new Random();
-		premier_joueur = rand.nextInt(2)+1;
+		premier_joueur = rand.nextInt(2)+1;		
 	}
-
+	
 	@Override
 	public int register(Client client) throws RemoteException {
 		if (joueur1 == null) {
@@ -49,7 +37,7 @@ public class OS extends UnicastRemoteObject implements IOS {
 			return 0;
 		}
 	}
-
+	
 	@Override
 	public int joueCoup(int joueur, int x, int y) throws RemoteException {
 		if (joueur==1) {

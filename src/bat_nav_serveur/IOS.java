@@ -1,6 +1,7 @@
 package bat_nav_serveur;
 
 import java.rmi.*;
+
 import bat_nav.Client;
 
 interface IOS extends Remote {
