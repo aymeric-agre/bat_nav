@@ -4,13 +4,11 @@ import java.rmi.*;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Random;
 
-import bat_nav_serveur.ServeurImpl;
-
 @SuppressWarnings("serial")
 public class Reseau implements Client {
 	
 	Plateau plateau;
-	ServeurImpl serveur;
+	IOS serveur;
 	//Plateau/Socket joueur_distant;
 	int joueur;
 	int premier_joueur;
@@ -23,7 +21,7 @@ public class Reseau implements Client {
 	public Reseau(Plateau p) {
 		try {
 			UnicastRemoteObject.exportObject(this);
-			serveur = (ServeurImpl) Naming.lookup("rmi:///bat_nav");
+			serveur = (IOS) Naming.lookup("//:2002/bat_nav");
 			joueur = serveur.register(this);
 		} catch (Exception e) {
 			System.out.println("Fail connection au serveur: " + e.getMessage());

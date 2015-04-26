@@ -3,7 +3,7 @@ package bat_nav_serveur;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.Naming;
 
-class ServeurImpl {
+public class ServeurImpl {
 	public static void main(String[] args) {
 		try {
 			try {
