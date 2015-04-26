@@ -1,42 +1,20 @@
 package bat_nav;
 
-import IOS;
-import OC;
-
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.rmi.Naming;
 
 import javax.swing.*;
 
 public class Interface {
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		IOS serveur;
-		String result;
-		OC client = new OC();
-		try {
-			String nomserveur = "//:2005/transformeur";
-			serveur = (IOS)Naming.lookup(nomserveur);
-		}
-		catch(Exception ex) {
-			System.out.println("Exception ; "+ ex.getMessage());
-			ex. printStackTrace();
-			return;
-		}
-		System.out.print("transformation de la chaine : bonjour --> ");
-		result = client.demande("bonjour",serveur);
-		System.out.println(result);
-		
-		
+	public static void main(String[] args) {		
 		Fenetre fenetre = new Fenetre();
 
 		fenetre.setVisible(true);
 		
-		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	//Ferme le programme à la fermeture de la fenêtre
+		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	//Ferme le programme ï¿½la fermeture de la fené»Žre
 	}
 }
 
@@ -100,7 +78,7 @@ class Fenetre extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Object ae = e.getSource();
 		if(ae == exit){
-			System.out.println("Arrêt du jeu.");
+			System.out.println("Arré»Ž du jeu.");
 			System.exit(0);
 		}else if(ae == newGame){
 			System.out.println("Nouvelle partie.");

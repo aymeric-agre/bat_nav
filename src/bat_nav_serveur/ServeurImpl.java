@@ -3,14 +3,13 @@ package bat_nav_serveur;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.Naming;
 
-class ServeurImpl {
+public class ServeurImpl {
 	public static void main(String[] args) {
 		try {
 			try {
 				LocateRegistry.createRegistry(2002);
 			} catch(Exception e){
-				System.out.println(e.getMessage());
-				System.out.println("Récupération du port défini");
+				System.out.println("RÃ©cupÃ©ration du port dÃ©fini");
 				LocateRegistry.getRegistry(2002);				
 			}			
 			OS serveur= new OS(); 
