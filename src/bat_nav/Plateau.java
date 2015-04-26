@@ -89,19 +89,15 @@ public class Plateau extends JPanel{
 					g.fillRect(base*i+marge, base*j+marge, base, base);
 				}
 			}
-		}
-		
+		}	
 		System.out.println("Dessin.");
 	}
-
 }
 
 class Traitement implements MouseListener 
 {
 	Plateau jeu;
-	
 	Traitement(Plateau j){ jeu=j; }
-
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		int x = e.getX();
@@ -147,32 +143,26 @@ class Traitement implements MouseListener
 			}
 			jeu.choix = 0;
 		}
-		
 		jeu.repaint();
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
-	
 }
