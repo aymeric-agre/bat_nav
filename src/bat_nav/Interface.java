@@ -27,6 +27,7 @@ class Fenetre extends JFrame implements ActionListener{
 	private JButton exit;
 	private Plateau plateau;
 	private Joueur joueur;	
+	private Reseau reseau;
 	
 	public Fenetre(){
 		f = this;
@@ -40,6 +41,7 @@ class Fenetre extends JFrame implements ActionListener{
 		infoJoueur = new JPanel();
 		boutons = new JPanel();
 		plateau = new Plateau(10);
+		reseau = new Reseau(plateau);
 	
 		newGame = new JButton("Nouvelle partie");
 		newGame.addActionListener(this);
