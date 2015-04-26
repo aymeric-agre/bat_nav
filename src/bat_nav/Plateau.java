@@ -90,7 +90,7 @@ public class Plateau extends JPanel{
 				}
 			}
 		}	
-		System.out.println("Dessin.");
+		//System.out.println("Dessin.");
 	}
 }
 
