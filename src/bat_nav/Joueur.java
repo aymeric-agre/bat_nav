@@ -5,15 +5,13 @@ import java.awt.GridLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
+@SuppressWarnings("serial")
 public class Joueur extends JPanel {
-	//Contient le score, historique, les bateaux qu'il reste
+	//Contient le score, historique
 	private String name;
 	private Integer score;
 	private Integer partiesJouees;
-	private DefaultTableModel model;
 	private JLabel pseudo, played, won;
 	
 	Joueur(String newName){

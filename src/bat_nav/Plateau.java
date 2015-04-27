@@ -7,13 +7,13 @@ import java.rmi.RemoteException;
 
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class Plateau extends JPanel{
 	//Contient le placement des bateaux
 	//Contient les coups jou駸 pr馗馘emment
 
 	Fenetre fenetre;
 	int[][] plateau; // -1 si c'est possible comme deuxième clic de positionnement de bateau, 1, si il y a une case de bateau, 0 si rien
-	int[][] viseur;
 	public int taille;
 	int phaseDeJeu; // placement de bateaux (0) ou en cours de partie (1)
 	int choix; // on a cliqué une fois pour commencer à placer un bateau (1) ou non (0)
@@ -42,16 +42,19 @@ public class Plateau extends JPanel{
 		this.repaint();
 	}
 	
+	// condition pour dire qu'on est prêt
 	public boolean pret()
 	{
 		return nb_bateaux == 5;
 	}
+	
 	// la partie commence, on n'ajoute plus de bateaux
 	public void commencer()
 	{
 		phaseDeJeu = 1;
 	}
 	
+	// est-on autorisé à jouer
 	public void jePeuxJouer(int jouer)
 	{
 		peut_jouer = jouer;
@@ -66,7 +69,7 @@ public class Plateau extends JPanel{
 	
 	// renvoie 0 si pas de bateau,
 	// 1 s'il y a un bateau à cette case
-	// 2 si on a perdu
+	// 2 sinon
 	public int coupJoue(int a, int b)
 	{
 		if(plateau[a][b]==1)
@@ -138,10 +141,9 @@ public class Plateau extends JPanel{
 				}
 			}
 		}	
-//		System.out.println("Dessin.");
 	}
 }
-
+// si c'est la grille de l'adversaire
 class TraitementSaGrille implements MouseListener
 {
 	Plateau jeu;
@@ -199,6 +201,8 @@ class TraitementMaGrille implements MouseListener
 	TraitementMaGrille(Plateau j){ jeu=j; }
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		// Premier clic pour l'origine
+		// Deuxième clic pour la direction
 		int x = e.getX();
 		int y = e.getY();
 		x=(x-jeu.marge)/jeu.base;

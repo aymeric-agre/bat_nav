@@ -2,10 +2,7 @@ package bat_nav;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -18,14 +15,14 @@ import javax.swing.*;
 
 public class Interface {
 	public static void main(String[] args) {
-		Fenetre fenetre = new Fenetre();
+		new Fenetre();
 	}
 }
 
 @SuppressWarnings("serial")
 class Fenetre extends JFrame implements ActionListener{
 	
-	private JPanel imageFond, boutons, stats;
+	private JPanel boutons, stats;
 	private JButton newPlayer, newGame, exit, ready;
 	private Plateau plateau1, plateau2;
 	private Joueur joueur1, joueur2;	
@@ -147,6 +144,7 @@ class Fenetre extends JFrame implements ActionListener{
 	}
 }
 
+@SuppressWarnings("serial")
 class panelFond extends JPanel{
 	private BufferedImage image;
 	

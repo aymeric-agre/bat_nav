@@ -5,7 +5,6 @@ import java.rmi.server.UnicastRemoteObject;
 
 import bat_nav_serveur.IOS;
 
-@SuppressWarnings("serial")
 public class Reseau implements Client {
 	
 	Plateau plateau1, plateau2;
@@ -56,11 +55,3 @@ public class Reseau implements Client {
 		plateau2.commencer();
 	}
 }
-
-/* Dans main:
- * try {
- * 	new Reseau();
- * } catch (RemoteException e) {
- * 	System.out.println("Fail :" + e.getMessage());
- * }
- */
