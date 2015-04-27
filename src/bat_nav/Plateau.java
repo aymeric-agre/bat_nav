@@ -127,8 +127,6 @@ class TraitementSaGrille implements MouseListener
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// la partie doit etre commencée  et ca doit etre à nous de jouer
-		System.out.println(jeu.phaseDeJeu);
-		System.out.println(jeu.peut_jouer);
 		if (jeu.phaseDeJeu == 0 || jeu.peut_jouer == 0) {
 			System.out.println("Pas a moi de jouer");
 			return;

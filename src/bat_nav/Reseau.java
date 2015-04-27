@@ -31,12 +31,14 @@ public class Reseau implements Client {
 	
 	//appelé par nous quand on veut jouer un coup sur la grille du joueur distant
 	public int joueCoup(int x, int y) throws RemoteException {
+		plateau2.jePeuxJouer(0);
 		return serveur.joueCoup(joueur, x, y);
 	}
 	
 	//appelé par le joueur distant quand il veut jouer un coup sur notre grille
 	public int recoitCoup(int x, int y) {
 		int resultat = plateau1.coupJoue(x, y);
+		plateau2.jePeuxJouer(1);
 		return resultat;
 	}
 	
