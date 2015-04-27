@@ -2,7 +2,6 @@ package bat_nav;
 
 import java.awt.Graphics;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +17,7 @@ public class Joueur extends JPanel {
 	Joueur(String newName){
 		this.stats = new JTable();
 		changePlayer(newName);	
-		add("North", stats);
+		add(stats);
 	}
 	
 	public void changePlayer(String newName){
@@ -36,8 +35,14 @@ public class Joueur extends JPanel {
 		
 		System.out.println("Création d\'un nouveau joueur: " + newName);
 	}
-
+	
+	public String getName(){
+		return this.name;
+	}
+	
 	public void paintComponent(Graphics g){
+		this.getWidth();
+		this.getHeight();
 	}
 }
 

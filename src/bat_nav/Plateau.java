@@ -64,9 +64,9 @@ public class Plateau extends JPanel{
 	}
 	
 	public void paintComponent(Graphics g){
-		marge = 30;
+		marge = 20;
 		super.paintComponent(g);
-		base=(this.getHeight()-marge)/taille;
+		base=(this.getHeight()-4*marge)/taille;
 		
 		for(int i = 0; i<taille+1; i++)
 		{
@@ -90,7 +90,7 @@ public class Plateau extends JPanel{
 				}
 			}
 		}	
-		//System.out.println("Dessin.");
+//		System.out.println("Dessin.");
 	}
 }
 

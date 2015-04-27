@@ -1,6 +1,7 @@
 package bat_nav;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,72 +10,86 @@ import javax.swing.*;
 
 public class Interface {
 	
-	public static void main(String[] args) {		
-		Fenetre fenetre = new Fenetre();
-
-		fenetre.setVisible(true);
+	public static void main(String[] args) {
 		
-		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	//Ferme le programme ï¿½la fermeture de la fené»Žre
+		Fenetre fenetre = new Fenetre();
+		
 	}
+	
 }
 
+@SuppressWarnings("serial")
 class Fenetre extends JFrame implements ActionListener{
-	private JFrame f;
-	private JPanel p;
-	private JPanel boutons;
-	private JButton newPlayer;
-	private JButton newGame;
-	private JButton exit;
-	private Plateau plateau;
-	private Joueur joueur;	
+	
+	private JPanel imageFond, boutons, stats;
+	private JButton newPlayer, newGame, exit;
+	private Plateau plateau1, plateau2;
+	private Joueur joueur1, joueur2;	
 	private Reseau reseau;
 	
 	public Fenetre(){
-		f = this;
-		f.setTitle("Bataille Navale");
-		f.setSize(800,600);
-		p = new JPanel();
-		p.setLayout(new BorderLayout());
-		f.setContentPane(p);
 		
-		joueur = new Joueur("");
-		newPlayer();
-		boutons = new JPanel();
-		plateau = new Plateau(10);
-		reseau = new Reseau(plateau);
-		
-		newPlayer = new JButton("Changer de profil");
+		this.setTitle("Bataille Navale");
+	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    this.setLocationRelativeTo(null);
+
+	    this.setLayout(new BorderLayout());
+	    
+	    //Au centre
+	    stats = new JPanel();
+	    
+	    newPlayer = new JButton("Changer de profil");
 		newPlayer.addActionListener(this);
-		
-		joueur.add("South", newPlayer);
-		
+	    joueur1 = new Joueur("");	newPlayer();
+	    joueur2 = new Joueur("");
+	    stats.add(new JLabel("Vous jouez contre : " + joueur2.getName()));
+	    stats.add(joueur1);
+	    stats.add(newPlayer);
+	    stats.setBounds(0, 0, 10, 10);
+	    this.getContentPane().add(stats, BorderLayout.CENTER);
+
+	    //Au sud
+	    boutons = new JPanel();
+	    
 		newGame = new JButton("Nouvelle partie");
 		newGame.addActionListener(this);
 		
 		exit = new JButton("Quitter");
 		exit.addActionListener(this);
 		
-		boutons.add("West", newGame);
-		boutons.add("East", exit);
-		
-		p.add("Center", plateau);
-		p.add("East", joueur);
-		p.add("South", boutons);
-		
-		f.setVisible(true);
-		System.out.println(plateau.getX()+"  "+plateau.getY());
-		System.out.println(plateau.getHeight()+"  "+plateau.getWidth());
+		boutons.add(newGame);
+		boutons.add(exit);
+	    
+	    this.getContentPane().add(boutons, BorderLayout.SOUTH);
+	    
+	    //À l'ouest
+	    plateau1 = new Plateau(10);
+	    plateau1.setPreferredSize(new Dimension(500,450));
+	    this.getContentPane().add(plateau1, BorderLayout.WEST);
+	    //À l'est
+	    plateau2 = new Plateau(10);
+	    plateau2.setPreferredSize(new Dimension(500,450));
+	    this.getContentPane().add(plateau2, BorderLayout.EAST);
+	    
+	    this.setSize(1200,600);
+	    this.setResizable(false);
+	    this.setVisible(true);
 	}
 
 	public void newGame() {
 		// TODO Auto-generated method stub
-		Integer taille = Integer.parseInt(JOptionPane.showInputDialog(null, "Taille du plateau.", "Taille du plateau", JOptionPane.QUESTION_MESSAGE));
-		plateau.changerTaille(taille);
+		Integer taille = Integer.parseInt(JOptionPane.showInputDialog(null, "La taille du plateau doit être comprise entre 5 et 25.", "Taille du plateau.", JOptionPane.QUESTION_MESSAGE));
+		if(taille > 5 && taille < 26){
+			plateau1.changerTaille(taille);
+			plateau2.changerTaille(taille);
+		}else{
+			newGame();
+		}
 	}
 
 	public void newPlayer(){
 		String name = JOptionPane.showInputDialog(null, "Nom du joueur.", "Nom du joueur", JOptionPane.QUESTION_MESSAGE);
-		joueur.changePlayer(name);
+		joueur1.changePlayer(name);
 	}
 	
 	@Override
