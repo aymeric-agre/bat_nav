@@ -27,8 +27,7 @@ class Fenetre extends JFrame implements ActionListener{
 	private Joueur joueur1, joueur2;	
 	private Reseau reseau;
 	
-	public Fenetre(){
-		
+	Fenetre(){
 		this.setTitle("Bataille Navale");
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.setLocationRelativeTo(null);
@@ -90,6 +89,7 @@ class Fenetre extends JFrame implements ActionListener{
 	public void newPlayer(){
 		String name = JOptionPane.showInputDialog(null, "Nom du joueur.", "Nom du joueur", JOptionPane.QUESTION_MESSAGE);
 		joueur1.changePlayer(name);
+		this.repaint();
 	}
 	
 	@Override

@@ -1,7 +1,9 @@
 package bat_nav;
 
 import java.awt.Graphics;
+import java.awt.GridLayout;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -11,13 +13,24 @@ public class Joueur extends JPanel {
 	private String name;
 	private Integer score;
 	private Integer partiesJouees;
-	private JTable stats;
 	private DefaultTableModel model;
+	private JLabel pseudo, played, won;
 	
 	Joueur(String newName){
-		this.stats = new JTable();
-		changePlayer(newName);	
-		add(stats);
+		this.setLayout(new GridLayout(3,2));
+		
+		pseudo = new JLabel();
+		played = new JLabel();
+		won = new JLabel();
+		
+		changePlayer(newName);
+		
+		this.add(new JLabel("Pseudo"));
+		this.add(pseudo);
+		this.add(new JLabel("Parties jouées"));
+		this.add(played);
+		this.add(new JLabel("Parties gagnées"));
+		this.add(won);
 	}
 	
 	public void changePlayer(String newName){
@@ -25,15 +38,15 @@ public class Joueur extends JPanel {
 		this.score = 0;
 		this.partiesJouees = 0;
 		
-		this.model = new DefaultTableModel();
-		this.model.addColumn("1");
-		this.model.addColumn("2");
-		this.model.addRow(new Object[]{"Pseudo", this.name});
-		this.model.addRow(new Object[]{"Parties jouées", this.partiesJouees});
-		this.model.addRow(new Object[]{"Parties gagnées", this.score});
-		this.stats.setModel(this.model);
+		this.pseudo.setText(this.name);
+		this.played.setText(this.score.toString());
+		this.won.setText(this.partiesJouees.toString());
 		
 		System.out.println("Création d\'un nouveau joueur: " + newName);
+	}
+	
+	public boolean isCellEditable(int row, int column){
+		return false;
 	}
 	
 	public String getName(){
