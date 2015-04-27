@@ -66,25 +66,47 @@ public class Plateau extends JPanel{
 	
 	// renvoie 0 si pas de bateau,
 	// 1 s'il y a un bateau à cette case
+	// 2 si on a perdu
 	public int coupJoue(int a, int b)
 	{
 		if(plateau[a][b]==1)
 		{
 			plateau[a][b] = -1;
 		}
-		return -plateau[a][b];
-		
+		// vérifier qu'on a encore des cases "en vie"
+		boolean vivant = false;
+		for(int i = 0; i<taille; i++)
+		{
+			for(int j = 0; j<taille; j++)
+			{
+				if(plateau[i][j]==1)
+				{
+					vivant = true;
+					break; // ca break pas des deux loops mais bon
+				}
+			}
+		}
+		if (vivant){
+			return -plateau[a][b];
+		} else {
+			this.fenetre.gagne();
+			return 2;
+		}
 	}
 	
 	public void joueCoup(int a, int b) throws RemoteException
 	{
 		System.out.println("Je joue");
-		if (this.fenetre.reseau.joueCoup(a,  b) == 0) {
+		int resultat = this.fenetre.reseau.joueCoup(a, b);
+		if (resultat == 0) {
 			System.out.println("Dans le vide");
 			plateau[a][b] = -1;
-		} else {
+		} else if (resultat == 1){
 			System.out.println("Touche");
 			plateau[a][b] = 1;
+		} else if (resultat == 2){
+			plateau[a][b] = 1;
+			this.fenetre.perdu();
 		}
 		this.repaint();	
 	}

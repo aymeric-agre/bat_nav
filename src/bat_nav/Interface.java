@@ -29,7 +29,7 @@ class Fenetre extends JFrame implements ActionListener{
 	private JButton newPlayer, newGame, exit, ready;
 	private Plateau plateau1, plateau2;
 	private Joueur joueur1, joueur2;	
-	public Reseau reseau;
+	Reseau reseau;
 	
 	Fenetre(){
 		this.setContentPane(new panelFond());
@@ -98,7 +98,14 @@ class Fenetre extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(null, "Placez 5 bateaux avant d'etre pret");
 		}
 	}
+	
+	public void perdu() {
+		JOptionPane.showMessageDialog(null, "Vous avez perdu");
+	}
 
+	public void gagne() {
+		JOptionPane.showMessageDialog(null,  "Vous avez gagne");
+	}
 	public void newGame() {
 		// TODO Auto-generated method stub
 		Integer taille = Integer.parseInt(JOptionPane.showInputDialog(null, "La taille du plateau doit �tre comprise entre 5 et 25.", "Taille du plateau.", JOptionPane.QUESTION_MESSAGE));
