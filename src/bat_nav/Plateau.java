@@ -3,6 +3,7 @@ package bat_nav;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.rmi.RemoteException;
 
 import javax.swing.*;
 
@@ -10,6 +11,7 @@ public class Plateau extends JPanel{
 	//Contient le placement des bateaux
 	//Contient les coups jou駸 pr馗馘emment
 
+	Fenetre fenetre;
 	int[][] plateau; // -1 si c'est possible comme deuxième clic de positionnement de bateau, 1, si il y a une case de bateau, 0 si rien
 	int[][] viseur;
 	public int taille;
@@ -19,18 +21,20 @@ public class Plateau extends JPanel{
 	int marge;
 	int absShot;
 	int ordShot;
-	Traitement t;
 	
-	Plateau(int ta)
+	Plateau(int taille, Fenetre fenetre, int type)
 	{
+		// type: 0 pour la notre, 1 pour celle du joueur distant
 		super();
-		Traitement t = new Traitement(this);
-		this.addMouseListener(t);
-		taille=ta;
+		this.fenetre = fenetre;
+		if (type == 0)
+			this.addMouseListener(new TraitementMaGrille(this));
+		else
+			this.addMouseListener(new TraitementSaGrille(this));
+		this.taille=taille;
 		phaseDeJeu = 0;
 		choix = 0;
 		plateau = new int[taille][taille];
-		viseur = new int[taille][taille];
 		this.repaint();
 	}
 	
@@ -38,7 +42,6 @@ public class Plateau extends JPanel{
 	{
 		taille = ta;
 		plateau = new int[taille][taille];
-		viseur = new int[taille][taille];
 		this.repaint();
 	}
 	
@@ -54,15 +57,14 @@ public class Plateau extends JPanel{
 		
 	}
 	
-	public void resultatTir(int a)
+	public void joueCoup(int a, int b) throws RemoteException
 	{
-		viseur[absShot][ordShot] = a;
-	}
-	
-	public void cible (int a, int b)
-	{
-		absShot = a;
-		ordShot = b;
+		if (this.fenetre.reseau.joueCoup(a,  b) == 0) {
+			plateau[a][b] = -1;
+		} else {
+			plateau[a][b] = 1;
+		}
+		this.repaint();	
 	}
 	
 	public void paintComponent(Graphics g){
@@ -96,10 +98,56 @@ public class Plateau extends JPanel{
 	}
 }
 
-class Traitement implements MouseListener 
+class TraitementSaGrille implements MouseListener
 {
 	Plateau jeu;
-	Traitement(Plateau j){ jeu=j; }
+	TraitementSaGrille(Plateau j){jeu=j;}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		int x = e.getX();
+		int y = e.getY();
+		x=(x-jeu.marge)/jeu.base;
+		y=(y-jeu.marge)/jeu.base;
+		System.out.println(x+" "+y);
+		
+		if(jeu.plateau[x][y] == 0) // on a jamais cliqué ici
+		{
+			try {
+				jeu.joueCoup(x,  y);
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}
+// si c'est la grille où on place nos bateaux
+class TraitementMaGrille implements MouseListener 
+{
+	Plateau jeu;
+	TraitementMaGrille(Plateau j){ jeu=j; }
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		int x = e.getX();

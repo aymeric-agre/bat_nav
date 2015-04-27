@@ -28,7 +28,7 @@ class Fenetre extends JFrame implements ActionListener{
 	private JButton newPlayer, newGame, exit;
 	private Plateau plateau1, plateau2;
 	private Joueur joueur1, joueur2;	
-	private Reseau reseau;
+	public Reseau reseau;
 	
 	Fenetre(){
 		this.setContentPane(new panelFond());
@@ -66,12 +66,12 @@ class Fenetre extends JFrame implements ActionListener{
 	    this.getContentPane().add(boutons, BorderLayout.SOUTH);
 	    
 	    //� l'ouest
-	    plateau1 = new Plateau(10);
+	    plateau1 = new Plateau(10, this, 0);
 	    plateau1.setPreferredSize(new Dimension(500,450));
 	    plateau1.setOpaque(false);
 	    this.getContentPane().add(plateau1, BorderLayout.WEST);
 	    //� l'est
-	    plateau2 = new Plateau(10);
+	    plateau2 = new Plateau(10, this, 1);
 	    plateau2.setPreferredSize(new Dimension(500,450));
 	    plateau2.setOpaque(false);
 	    this.getContentPane().add(plateau2, BorderLayout.EAST);
