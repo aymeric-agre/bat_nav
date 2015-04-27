@@ -78,9 +78,12 @@ public class Plateau extends JPanel{
 	
 	public void joueCoup(int a, int b) throws RemoteException
 	{
+		System.out.println("Je joue");
 		if (this.fenetre.reseau.joueCoup(a,  b) == 0) {
+			System.out.println("Dans le vide");
 			plateau[a][b] = -1;
 		} else {
+			System.out.println("Touche");
 			plateau[a][b] = 1;
 		}
 		this.repaint();	
@@ -124,7 +127,12 @@ class TraitementSaGrille implements MouseListener
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// la partie doit etre commencée  et ca doit etre à nous de jouer
-		if (jeu.phaseDeJeu == 0 || jeu.peut_jouer == 0) return;
+		System.out.println(jeu.phaseDeJeu);
+		System.out.println(jeu.peut_jouer);
+		if (jeu.phaseDeJeu == 0 || jeu.peut_jouer == 0) {
+			System.out.println("Pas a moi de jouer");
+			return;
+		};
 		// TODO Auto-generated method stub
 		int x = e.getX();
 		int y = e.getY();
@@ -177,7 +185,7 @@ class TraitementMaGrille implements MouseListener
 		y=(y-jeu.marge)/jeu.base;
 		System.out.println(x+" "+y);
 		
-		if(jeu.phaseDeJeu==0&&jeu.choix==0)
+		if(jeu.phaseDeJeu==0&&jeu.choix==0&&jeu.nb_bateaux<5&&jeu.plateau[x][y]==0)
 		{
 			if(x>=0&&x<jeu.taille&&y>=0&&y<jeu.taille)
 			{
@@ -199,6 +207,8 @@ class TraitementMaGrille implements MouseListener
 		{
 			if(jeu.plateau[x][y]==-1)
 			{
+
+				jeu.nb_bateaux++;
 				for(int i = 0; i<3; i++)
 				{
 					jeu.plateau[jeu.absShot+(x-jeu.absShot)*i][jeu.ordShot+(y-jeu.ordShot)*i]=1;
@@ -213,7 +223,6 @@ class TraitementMaGrille implements MouseListener
 				}
 			}
 			jeu.choix = 0;
-			jeu.nb_bateaux++;
 		}
 		jeu.repaint();
 	}

@@ -8,15 +8,15 @@ import bat_nav_serveur.IOS;
 @SuppressWarnings("serial")
 public class Reseau implements Client {
 	
-	Plateau plateau;
+	Plateau plateau1, plateau2;
 	IOS serveur;
 	int joueur; // notre numéro de joueur
 	int premier_joueur; //qui commence à jouer
 	
-	public Reseau(Plateau p) {
+	public Reseau(Plateau p1, Plateau p2) {
 		try {
 			UnicastRemoteObject.exportObject(this);
-			serveur = (IOS) Naming.lookup("rmi:///bat_nav");
+			serveur = (IOS) Naming.lookup("//:2002/bat_nav");
 			joueur = serveur.register(this);
 			if (joueur == 0) {
 				System.out.println("Trop de joueurs connectes");
@@ -25,7 +25,8 @@ public class Reseau implements Client {
 		} catch (Exception e) {
 			System.out.println("Fail connection au serveur: " + e.getMessage());
 		}
-		plateau = p;
+		plateau1 = p1;
+		plateau2 = p2;
 	}
 	
 	//appelé par nous quand on veut jouer un coup sur la grille du joueur distant
@@ -35,7 +36,7 @@ public class Reseau implements Client {
 	
 	//appelé par le joueur distant quand il veut jouer un coup sur notre grille
 	public int recoitCoup(int x, int y) {
-		int resultat = plateau.coupJoue(x, y);
+		int resultat = plateau1.coupJoue(x, y);
 		return resultat;
 	}
 	
@@ -44,11 +45,13 @@ public class Reseau implements Client {
 	}
 	
 	public void commencePartie(int joueur) {
+		System.out.println("La partie commence");
 		if (this.joueur == joueur) {
-			plateau.jePeuxJouer(1);
+			System.out.println("Je commence");
+			plateau2.jePeuxJouer(1);
 		}
 		// la partie commence
-		plateau.commencer();
+		plateau2.commencer();
 	}
 }
 

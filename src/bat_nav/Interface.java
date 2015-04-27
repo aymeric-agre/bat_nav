@@ -82,7 +82,7 @@ class Fenetre extends JFrame implements ActionListener{
 	    this.getContentPane().add(plateau2, BorderLayout.EAST);
 	    
     	// réseau
-	    reseau = new Reseau(plateau1);
+	    reseau = new Reseau(plateau1, plateau2);
 	    
 	    this.setVisible(true);
 	    this.setSize(1200,600);
@@ -128,6 +128,14 @@ class Fenetre extends JFrame implements ActionListener{
 		}else if(ae == newPlayer){
 			System.out.println("Changement de joueur.");
 			newPlayer();
+		}else if(ae == ready){
+			System.out.println("Ready");
+			try {
+				ready();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 }
