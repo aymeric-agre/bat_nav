@@ -39,19 +39,16 @@ public class Reseau implements Client {
 		return resultat;
 	}
 	
-	public void placeBateaux() {
-		//plateau.placeBateaux();
-	}
-	
 	public void jeSuisPret() throws RemoteException {
 		serveur.pret(joueur);
 	}
 	
 	public void commencePartie(int joueur) {
 		if (this.joueur == joueur) {
-			//c'est a nous de commencer
+			plateau.jePeuxJouer(1);
 		}
 		// la partie commence
+		plateau.commencer();
 	}
 }
 

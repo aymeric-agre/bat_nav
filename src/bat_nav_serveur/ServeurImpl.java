@@ -13,7 +13,7 @@ public class ServeurImpl {
 				LocateRegistry.getRegistry(2002);				
 			}			
 			OS serveur= new OS(); 
-			Naming.rebind("//:2002/transformeur",serveur);
+			Naming.rebind("rmi:///bat_nav",serveur);
 		}
 		catch(Exception e){
 			System.out.println("Exception au lancement du serveur");

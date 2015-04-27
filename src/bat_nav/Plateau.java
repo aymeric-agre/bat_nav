@@ -17,7 +17,9 @@ public class Plateau extends JPanel{
 	public int taille;
 	int phaseDeJeu; // placement de bateaux (0) ou en cours de partie (1)
 	int choix; // on a cliqué une fois pour commencer à placer un bateau (1) ou non (0)
+	int peut_jouer;
 	int base;
+	int nb_bateaux;
 	int marge;
 	int absShot;
 	int ordShot;
@@ -35,7 +37,24 @@ public class Plateau extends JPanel{
 		phaseDeJeu = 0;
 		choix = 0;
 		plateau = new int[taille][taille];
+		peut_jouer = 0;
+		nb_bateaux = 0;// nombre de bateaux placés
 		this.repaint();
+	}
+	
+	public boolean pret()
+	{
+		return nb_bateaux == 5;
+	}
+	// la partie commence, on n'ajoute plus de bateaux
+	public void commencer()
+	{
+		phaseDeJeu = 1;
+	}
+	
+	public void jePeuxJouer(int jouer)
+	{
+		peut_jouer = jouer;
 	}
 	
 	public void changerTaille(int ta)
@@ -104,6 +123,8 @@ class TraitementSaGrille implements MouseListener
 	TraitementSaGrille(Plateau j){jeu=j;}
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		// la partie doit etre commencée  et ca doit etre à nous de jouer
+		if (jeu.phaseDeJeu == 0 || jeu.peut_jouer == 0) return;
 		// TODO Auto-generated method stub
 		int x = e.getX();
 		int y = e.getY();
@@ -192,6 +213,7 @@ class TraitementMaGrille implements MouseListener
 				}
 			}
 			jeu.choix = 0;
+			jeu.nb_bateaux++;
 		}
 		jeu.repaint();
 	}

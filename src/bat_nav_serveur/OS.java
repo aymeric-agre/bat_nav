@@ -25,12 +25,7 @@ class OS extends UnicastRemoteObject implements IOS {
 			joueur1 = client;
 			return 1;
 		} else if (joueur2 == null) {
-			joueur2 = client;
-			
-			// on a deux joueurs: on place les bateaux
-			joueur1.placeBateaux();
-			joueur2.placeBateaux();
-			
+			joueur2 = client;			
 			return 2;
 		} else {
 			System.out.println("Un troisieme joueur essaye de se connecter");

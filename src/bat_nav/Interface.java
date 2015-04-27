@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.rmi.RemoteException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -25,7 +26,7 @@ public class Interface {
 class Fenetre extends JFrame implements ActionListener{
 	
 	private JPanel imageFond, boutons, stats;
-	private JButton newPlayer, newGame, exit;
+	private JButton newPlayer, newGame, exit, ready;
 	private Plateau plateau1, plateau2;
 	private Joueur joueur1, joueur2;	
 	public Reseau reseau;
@@ -56,10 +57,14 @@ class Fenetre extends JFrame implements ActionListener{
 		newGame = new JButton("Nouvelle partie");
 		newGame.addActionListener(this);
 		
+		ready = new JButton("Ready");
+		ready.addActionListener(this);
+		
 		exit = new JButton("Quitter");
 		exit.addActionListener(this);
 		
 		boutons.add(newGame);
+		boutons.add(ready);
 		boutons.add(exit);
 		boutons.setOpaque(false);
 	    
@@ -84,6 +89,14 @@ class Fenetre extends JFrame implements ActionListener{
 	    this.setResizable(false);
 	    
 	    newPlayer();
+	}
+	
+	public void ready() throws RemoteException {
+		if (plateau1.pret()) {
+			reseau.jeSuisPret();
+		} else {
+			JOptionPane.showMessageDialog(null, "Placez 5 bateaux avant d'etre pret");
+		}
 	}
 
 	public void newGame() {
