@@ -3,9 +3,16 @@ package bat_nav;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class Interface {
@@ -13,7 +20,6 @@ public class Interface {
 	public static void main(String[] args) {
 		
 		Fenetre fenetre = new Fenetre();
-		
 	}
 	
 }
@@ -28,10 +34,9 @@ class Fenetre extends JFrame implements ActionListener{
 	private Reseau reseau;
 	
 	Fenetre(){
+		this.setContentPane(new panelFond());
 		this.setTitle("Bataille Navale");
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    this.setLocationRelativeTo(null);
-
 	    this.setLayout(new BorderLayout());
 	    
 	    //Au centre
@@ -39,12 +44,13 @@ class Fenetre extends JFrame implements ActionListener{
 	    
 	    newPlayer = new JButton("Changer de profil");
 		newPlayer.addActionListener(this);
-	    joueur1 = new Joueur("");	newPlayer();
+		joueur1 = new Joueur("");
 	    joueur2 = new Joueur("");
-	    stats.add(new JLabel("Vous jouez contre : " + joueur2.getName()));
+	    stats.add(new JLabel("Vous jouez contre : "));
+	    stats.add(joueur2);
 	    stats.add(joueur1);
 	    stats.add(newPlayer);
-	    stats.setBounds(0, 0, 10, 10);
+	    stats.setOpaque(false);
 	    this.getContentPane().add(stats, BorderLayout.CENTER);
 
 	    //Au sud
@@ -58,21 +64,27 @@ class Fenetre extends JFrame implements ActionListener{
 		
 		boutons.add(newGame);
 		boutons.add(exit);
+		boutons.setOpaque(false);
 	    
 	    this.getContentPane().add(boutons, BorderLayout.SOUTH);
 	    
 	    //À l'ouest
 	    plateau1 = new Plateau(10);
 	    plateau1.setPreferredSize(new Dimension(500,450));
+	    plateau1.setOpaque(false);
 	    this.getContentPane().add(plateau1, BorderLayout.WEST);
 	    //À l'est
 	    plateau2 = new Plateau(10);
 	    plateau2.setPreferredSize(new Dimension(500,450));
+	    plateau2.setOpaque(false);
 	    this.getContentPane().add(plateau2, BorderLayout.EAST);
 	    
+	    
+	    this.setVisible(true);
 	    this.setSize(1200,600);
 	    this.setResizable(false);
-	    this.setVisible(true);
+	    
+	    newPlayer();
 	}
 
 	public void newGame() {
@@ -105,5 +117,23 @@ class Fenetre extends JFrame implements ActionListener{
 			System.out.println("Changement de joueur.");
 			newPlayer();
 		}
+	}
+}
+
+class panelFond extends JPanel{
+	private BufferedImage image;
+	
+	public panelFond(){
+		try {
+			image = ImageIO.read(new File("img\\fond.jpg"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void paintComponent(Graphics g){	
+		super.paintComponent(g);
+		g.drawImage(image, 0, 0, 1200, 600, null);
 	}
 }
