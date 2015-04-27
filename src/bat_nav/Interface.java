@@ -16,12 +16,9 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class Interface {
-	
 	public static void main(String[] args) {
-		
 		Fenetre fenetre = new Fenetre();
 	}
-	
 }
 
 @SuppressWarnings("serial")
@@ -68,17 +65,19 @@ class Fenetre extends JFrame implements ActionListener{
 	    
 	    this.getContentPane().add(boutons, BorderLayout.SOUTH);
 	    
-	    //À l'ouest
+	    //ï¿½ l'ouest
 	    plateau1 = new Plateau(10);
 	    plateau1.setPreferredSize(new Dimension(500,450));
 	    plateau1.setOpaque(false);
 	    this.getContentPane().add(plateau1, BorderLayout.WEST);
-	    //À l'est
+	    //ï¿½ l'est
 	    plateau2 = new Plateau(10);
 	    plateau2.setPreferredSize(new Dimension(500,450));
 	    plateau2.setOpaque(false);
 	    this.getContentPane().add(plateau2, BorderLayout.EAST);
 	    
+    	// rÃ©seau
+	    reseau = new Reseau(plateau1);
 	    
 	    this.setVisible(true);
 	    this.setSize(1200,600);
@@ -89,7 +88,7 @@ class Fenetre extends JFrame implements ActionListener{
 
 	public void newGame() {
 		// TODO Auto-generated method stub
-		Integer taille = Integer.parseInt(JOptionPane.showInputDialog(null, "La taille du plateau doit être comprise entre 5 et 25.", "Taille du plateau.", JOptionPane.QUESTION_MESSAGE));
+		Integer taille = Integer.parseInt(JOptionPane.showInputDialog(null, "La taille du plateau doit ï¿½tre comprise entre 5 et 25.", "Taille du plateau.", JOptionPane.QUESTION_MESSAGE));
 		if(taille > 5 && taille < 26){
 			plateau1.changerTaille(taille);
 			plateau2.changerTaille(taille);

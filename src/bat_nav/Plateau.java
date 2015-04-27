@@ -8,13 +8,13 @@ import javax.swing.*;
 
 public class Plateau extends JPanel{
 	//Contient le placement des bateaux
-	//Contient les coups jou�s pr�c�demment
+	//Contient les coups jou駸 pr馗馘emment
 
-	int[][] plateau;
+	int[][] plateau; // -1 si c'est possible comme deuxième clic de positionnement de bateau, 1, si il y a une case de bateau, 0 si rien
 	int[][] viseur;
 	public int taille;
-	int phaseDeJeu;
-	int choix;
+	int phaseDeJeu; // placement de bateaux (0) ou en cours de partie (1)
+	int choix; // on a cliqué une fois pour commencer à placer un bateau (1) ou non (0)
 	int base;
 	int marge;
 	int absShot;
@@ -42,6 +42,8 @@ public class Plateau extends JPanel{
 		this.repaint();
 	}
 	
+	// renvoie 0 si pas de bateau,
+	// 1 s'il y a un bateau à cette case
 	public int coupJoue(int a, int b)
 	{
 		if(plateau[a][b]==1)

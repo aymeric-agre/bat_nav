@@ -10,13 +10,8 @@ public class Reseau implements Client {
 	
 	Plateau plateau;
 	IOS serveur;
-	int joueur;
-	int premier_joueur;
-	
-	//on essaye de se connecter à telle personne
-	//client = joueur 1
-	//serveur = joueur 2
-	//il faut se mettre d'accord
+	int joueur; // notre numéro de joueur
+	int premier_joueur; //qui commence à jouer
 	
 	public Reseau(Plateau p) {
 		try {
@@ -48,8 +43,8 @@ public class Reseau implements Client {
 		//plateau.placeBateaux();
 	}
 	
-	public void jeSuisPret() {
-		//serveur.pret(joueur);
+	public void jeSuisPret() throws RemoteException {
+		serveur.pret(joueur);
 	}
 	
 	public void commencePartie(int joueur) {
